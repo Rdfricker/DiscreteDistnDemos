@@ -1,0 +1,393 @@
+lr.out$converged
+x <- seq(1600,1900,20)#
+est.V50.vec <- vector()#
+#
+for(i in 1:1000){#
+	p <- pnorm(x,1750,50)#
+	pen.ind <- rbinom(length(p),1,p)#
+	lr.out <- glm(pen.ind ~ x,family=binomial)#
+	if(lr.out$converged=TRUE){#
+		est.V50.vec <- c(est.V50.vec,-(lr.out$coefficients[1]/lr.out$coefficients[2]))#
+		}#
+	}
+x <- seq(1600,1900,20)
+est.V50.vec <- vector()
+p <- pnorm(x,1750,50)
+pen.ind <- rbinom(length(p),1,p)
+lr.out <- glm(pen.ind ~ x,family=binomial)
+est.V50.vec
+if(lr.out$converged=TRUE){#
+		est.V50.vec <- c(est.V50.vec,-(lr.out$coefficients[1]/lr.out$coefficients[2]))#
+		}
+est.V50.vec
+if(lr.out$converged==TRUE){#
+		est.V50.vec <- c(est.V50.vec,-(lr.out$coefficients[1]/lr.out$coefficients[2]))#
+		}
+est.V50.vec
+ls()
+rm(est.V50.vec,lr.out,p,pen.ind,x)
+ls()
+x <- seq(1600,1900,20)#
+est.V50.vec <- vector()#
+#
+for(i in 1:1000){#
+	p <- pnorm(x,1750,50)#
+	pen.ind <- rbinom(length(p),1,p)#
+	lr.out <- glm(pen.ind ~ x,family=binomial)#
+	if(lr.out$converged==TRUE){#
+		est.V50.vec <- c(est.V50.vec,-(lr.out$coefficients[1]/lr.out$coefficients[2]))#
+		}#
+	}
+length(est.V50.vec)
+mean(est.V50.vec)#
+sd(est.V50.vec)
+x <- seq(1600,1900,20)#
+est.V50.vec <- vector()#
+#
+for(i in 1:10000){#
+	p <- pnorm(x,1750,50)#
+	pen.ind <- rbinom(length(p),1,p)#
+	lr.out <- glm(pen.ind ~ x,family=binomial)#
+	if(lr.out$converged==TRUE){#
+		est.V50.vec <- c(est.V50.vec,-(lr.out$coefficients[1]/lr.out$coefficients[2]))#
+		}#
+	}#
+mean(est.V50.vec)#
+sd(est.V50.vec)#
+sd(est.V50.vec)/sqrt(length(est.V50.vec))
+x <- seq(1600,1900,20)#
+est.V50.vec <- vector()#
+#
+for(i in 1:100000){#
+	p <- pnorm(x,1750,50)#
+	pen.ind <- rbinom(length(p),1,p)#
+	lr.out <- glm(pen.ind ~ x,family=binomial)#
+	if(lr.out$converged==TRUE){#
+		est.V50.vec <- c(est.V50.vec,-(lr.out$coefficients[1]/lr.out$coefficients[2]))#
+		}#
+	}#
+mean(est.V50.vec)#
+sd(est.V50.vec)#
+sd(est.V50.vec)/sqrt(length(est.V50.vec))
+log(.1/.9)
+x <- seq(1600,1900,20)#
+est.V10.vec <- vector()#
+#
+for(i in 1:1000){#
+	p <- pnorm(x,1750,50)#
+	pen.ind <- rbinom(length(p),1,p)#
+	lr.out <- glm(pen.ind ~ x,family=binomial)#
+	if(lr.out$converged==TRUE){#
+		est.V10.vec <- c(est.V10.vec,((log(0.1/0.9)-lr.out$coefficients[1])/lr.out$coefficients[2]))#
+		}#
+	}#
+mean(est.V10.vec)#
+sd(est.V10.vec)#
+sd(est.V10.vec)/sqrt(length(est.V10.vec))
+?qnorm
+qnorm(0.1,1750.50)
+qnorm(0.1,1750,50)
+x <- seq(1600,1900,20)#
+est.V10.vec <- vector()#
+#
+for(i in 1:100000){#
+	p <- pnorm(x,1750,50)#
+	pen.ind <- rbinom(length(p),1,p)#
+	lr.out <- glm(pen.ind ~ x,family=binomial)#
+	if(lr.out$converged==TRUE){#
+		est.V10.vec <- c(est.V10.vec,((log(0.1/0.9)-lr.out$coefficients[1])/lr.out$coefficients[2]))#
+		}#
+	}#
+mean(est.V10.vec)#
+sd(est.V10.vec)#
+sd(est.V10.vec)/sqrt(length(est.V10.vec))
+one_loop_func <- function(dist, n, v, V_test){#
+#
+	# Initialize#
+	diff <- 10000000#
+#
+	# Data holders#
+	V_test_vector <- vector()#
+	V_helmet_vector <- vector()#
+	pen_vector <- vector()#
+	while(diff > dist){#
+		# Conduct the test#
+		V_helmet <- rnorm(1,1750,50)   # Mean min V50 is for 64-grain RCC from PD#
+		pen_ind <- as.numeric(V_test > V_helmet)#
+		# Save the results#
+		V_test_vector <- c(V_test_vector,V_test)#
+		V_helmet_vector <- c(V_helmet_vector,V_helmet)#
+		pen_vector <- c(pen_vector,pen_ind)	#
+		# Adjust the velocity#
+		if(pen_ind==1) V_test <- V_test - v#
+		if(pen_ind==0) V_test <- V_test + v	#
+	if(sum(pen_vector) >= n & (length(pen_vector)-sum(pen_vector)) >= n){#
+		diff <- sort(V_test_vector[pen_vector==1])[n] - sort(V_test_vector[pen_vector==0],decreasing=TRUE)[n]#
+		if(diff <= dist){#
+			lower_sum <- sum(sort(V_test_vector[pen_vector==1])[1:n])#
+			upper_sum <- sum(sort(V_test_vector[pen_vector==0],decreasing=TRUE)[1:n])#
+			est_V50 <- (lower_sum+upper_sum)/(2*n)#
+			}#
+		}#
+	}#
+	est_V50#
+}
+one_loop_func <- function(dist, n, v, V_test){#
+#
+	# Initialize#
+	diff <- 10000000#
+#
+	# Data holders#
+	V_test_vector <- vector()#
+	V_helmet_vector <- vector()#
+	pen_vector <- vector()#
+	while(diff > dist){#
+		# Conduct the test#
+		V_helmet <- rnorm(1,1750,50)   # Mean min V50 is for 64-grain RCC from PD#
+		pen_ind <- as.numeric(V_test > V_helmet)#
+		# Save the results#
+		V_test_vector <- c(V_test_vector,V_test)#
+		V_helmet_vector <- c(V_helmet_vector,V_helmet)#
+		pen_vector <- c(pen_vector,pen_ind)	#
+		# Adjust the velocity#
+		if(pen_ind==1) V_test <- V_test - v#
+		if(pen_ind==0) V_test <- V_test + v	#
+	if(sum(pen_vector) >= n & (length(pen_vector)-sum(pen_vector)) >= n){#
+		diff <- sort(V_test_vector[pen_vector==1])[n] - sort(V_test_vector[pen_vector==0],decreasing=TRUE)[n]#
+		if(diff <= dist){#
+			lower_sum <- sum(sort(V_test_vector[pen_vector==1])[1:n])#
+			upper_sum <- sum(sort(V_test_vector[pen_vector==0],decreasing=TRUE)[1:n])#
+			est_V50 <- (lower_sum+upper_sum)/(2*n)#
+			}#
+		}#
+	}#
+    c(est_V50, length(pen_vector))#
+}
+one_loop_func(150,5,50,1850)
+count_func <- function(M=100, dist=150, n=5, v=50, V_test=1850){#
+	# data holder#
+	count_vector <- vector()#
+	j <- 1#
+	while(j<=M){#
+		out <- one_loop_func(dist, n, v, V_test)#
+		if(out[1]>0){#
+			count_vector <- c(count_vector,out[2])#
+			j <- j+1#
+		}	#
+	}	#
+#
+	c(mean(count_vector), sd(count_vector)/sqrt(length(count_vector)))#
+}#
+#
+count_func(1000000)
+count_func <- function(M=100, dist=150, n=5, v=50, V_test=1850){#
+	# data holder#
+	count_vector <- vector()#
+	j <- 1#
+	while(j<=M){#
+		out <- one_loop_func(dist, n, v, V_test)#
+		if(out[1]>0){#
+			count_vector <- c(count_vector,out[2])#
+			j <- j+1#
+		}	#
+	}	#
+#
+	c(mean(count_vector), sd(count_vector)/sqrt(length(count_vector)))#
+}#
+#
+count_func(10000)
+7/11049
+t.test(c(rep(0,7),rep(1,11042)))
+t.test(c(rep(1,7),rep(0,11042)))
+1074*5
+470*5
+470*6
+1074*6
+11/049
+11049/5
+7/2200
+t.test(c(rep(1,7),rep(0,2200)))
+227236.8-35000
+data <- read.csv(file.choose())
+data
+data$price.per.sqft <- data$selling.price/data$Square.feet
+data
+data[sort(data$price.per.sqft)]
+data[,sort(data$price.per.sqft)]
+data[,oder(data$price.per.sqft)]
+data[,order(data$price.per.sqft)]
+order(data$price.per.sqft)
+?order
+rank(data$price.per.sqft)
+data[rank(data$price.per.sqft),]
+data[,rank(data$price.per.sqft)]
+data[with(data,order(data$price.per.sqft),]
+data[with(data,order(data$price.per.sqft)),]
+1/52
+2^6
+2^10
+0.2^10
+0.7^10
+192236.8+35000
+84848+9000
+2*0.7*0.3
+2*0.49+0.42
+?pbinom
+1-pbinom(q=0,size=10,p=0.05)
+1-pbinom(q=0,size=10,prob=0.05)
+.95^5
+1-pbinom(q=0,size=5,prob=0.05)
+pbinom(q=1,size=5,prob=0.05,lower.tail=FALSE)
+choose(5,0)*0.05^0*0.95^5
+1-pbinom(q=0,size=5,prob=0.05)
+1-choose(5,0)*0.05^0*0.95^5
+pbinom(q=1,size=5,prob=0.05,lower.tail=FALSE)
+pbinom(q=0,size=5,prob=0.05,lower.tail=FALSE)
+1-pbinom(q=0,size=5,prob=0.05)
+1-choose(5,0)*0.05^0*0.95^5
+pbinom(q=0,size=5,prob=0.05,lower.tail=FALSE)
+0.95^5
+1-pbinom(q=0,size=5,prob=0.05)
+1-choose(5,0)*0.05^0*0.95^5
+pbinom(q=0,size=5,prob=0.05,lower.tail=FALSE)
+1-0.95^5
+1-pbinom(q=8,size=10,prob=0.3)
+choose(10,9)*0.3^9*0.7^1+choose(10,10)*0.3^10*0.7^0
+dbinom(q=9,size=10,prob=0.3)+dbinom(10,10,0.3)
+?dbinom
+dbinom(x=9,size=10,prob=0.3)+dbinom(10,10,0.3)
+1-pbinom(q=8,size=10,prob=0.3)
+dbinom(x=9,size=10,prob=0.3)+dbinom(10,10,0.3)
+choose(10,9)*0.3^9*0.7^1+choose(10,10)*0.3^10*0.7^0
+1-pbinom(3,20,0.05)
+?maximize
+?nmaximize
+??maximize
+?optim
+65*7
+1-pgeom(2,0.02)
+?pgeom
+1-0.02-0.02*0.98
+1-pgeom(1,0.02)
+pgeom(1,0.02,lower.tail=FALSE)
+7*142
+dnbinom(3,3,0.5)
+dnbinom(0,3,0.5)
+dnbinom(1,3,0.5)
+dnbinom(2,3,0.5)
+dnbinom(4,3,0.5)
+dnbinom(5,3,0.5)
+dnbinom(6,3,0.5)
+dnbinom(7,3,0.5)
+dnbinom(8,3,0.5)
+dnbinom(9,3,0.5)
+dnbinom(10,3,0.5)
+pnbinom(3,2,0.3)
+dnbinom(0,2,0.3)+dnbinom(1,2,0.3)+dnbinom(2,2,0.3)+dnbinom(3,2,0.3)
+0.5^3
+dnbinom(0,3,0.5)
+?choose
+choose(15,5)/choose(20,10)
+choose(5,5)*choose(15,5)/choose(20,10)
+dhyper(5,5,15,10)
+?pbinom
+dbinom(3,1000000,.00001)
+dbinom(3,10000000000,.000000001)
+dbinom(3,10000000000,.0000000001)
+1000000*.00001
+?dpois
+dpois(3,10)
+dpois(0,1)
+dpois(1,1)
+dpois(2,1)
+1-ppois(0,1)
+ppois(0,1,lower.tail=FALSE)
+exp(-1)/factorial(2)
+268.78/2
+DC<-read.table("C:\\Users\\rdfricker\\Desktop\\data.txt",header=TRUE,sep=",")
+DC<-read.csv(choose.file())
+DC<-read.csv(file.choose())
+dim(DC)
+DC<-DC[,1:11]
+dim(DC)
+Gastro_hospA<-DC$gastro[DC$hospital_code=="A"]  Gastro_hospB<-DC$gastro[DC$hospital_code=="B"]  Gastro_hospC<-DC$gastro[DC$hospital_code=="C"]  Gastro_hospD<-DC$gastro[DC$hospital_code=="D"]  Gastro_hospE<-DC$gastro[DC$hospital_code=="E"]  Gastro_hospH<-DC$gastro[DC$hospital_code=="H"]  Gastro_hospI<-DC$gastro[DC$hospital_code=="I"]
+Gastro_hospA
+Resp_hospA<-DC$resp[DC$hospital_code=="A"]  Resp_hospB<-DC$resp[DC$hospital_code=="B"]  Resp_hospC<-DC$resp[DC$hospital_code=="C"]  Resp_hospD<-DC$resp[DC$hospital_code=="D"]  Resp_hospE<-DC$resp[DC$hospital_code=="E"]  Resp_hospH<-DC$resp[DC$hospital_code=="H"]  Resp_hospI<-DC$resp[DC$hospital_code=="I"]
+for(i in 4:length(Gastro_hospA)){    if(is.na(Gastro_hospA[i])){Gastro_hospA[i]<-mean(Gastro_hospA[(i-3):(i-1)])}}for(i in 4:length(Gastro_hospB)){    if(is.na(Gastro_hospB[i])){Gastro_hospB[i]<-mean(Gastro_hospB[(i-3):(i-1)])}}for(i in 4:length(Gastro_hospC)){    if(is.na(Gastro_hospC[i])){Gastro_hospC[i]<-mean(Gastro_hospC[(i-3):(i-1)])}}for(i in 4:length(Gastro_hospD)){    if(is.na(Gastro_hospD[i])){Gastro_hospD[i]<-mean(Gastro_hospD[(i-3):(i-1)])}}for(i in 4:length(Gastro_hospE)){    if(is.na(Gastro_hospE[i])){Gastro_hospE[i]<-mean(Gastro_hospE[(i-3):(i-1)])}}Gastro_hospE[1:7]<- Gastro_hospE[41:47]Gastro_hospE[9:19]<- Gastro_hospE[49:59]Gastro_hospE[21:37]<- Gastro_hospE[61:77]Gastro_hospE[39:40]<- Gastro_hospE[79:80]for(i in 4:length(Gastro_hospH)){    if(is.na(Gastro_hospH[i])){Gastro_hospH[i]<-mean(Gastro_hospH[(i-3):(i-1)])}}Gastro_hospH[1]<-2for(i in 4:length(Gastro_hospI)){    if(is.na(Gastro_hospI[i])){Gastro_hospI[i]<-mean(Gastro_hospI[(i-3):(i-1)])}}
+for(i in 4:length(Resp_hospA)){    if(is.na(Resp_hospA[i])){Resp_hospA[i]<-mean(Resp_hospA[(i-3):(i-1)])}}for(i in 4:length(Resp_hospB)){    if(is.na(Resp_hospB[i])){Resp_hospB[i]<-mean(Resp_hospB[(i-3):(i-1)])}}for(i in 4:length(Resp_hospC)){    if(is.na(Resp_hospC[i])){Resp_hospC[i]<-mean(Resp_hospC[(i-3):(i-1)])}}for(i in 4:length(Resp_hospD)){    if(is.na(Resp_hospD[i])){Resp_hospD[i]<-mean(Resp_hospD[(i-3):(i-1)])}}for(i in 4:length(Resp_hospE)){    if(is.na(Resp_hospE[i])){Resp_hospE[i]<-mean(Resp_hospE[(i-3):(i-1)])}}Resp_hospE[1:7]<- Resp_hospE[41:47]Resp_hospE[9:19]<- Resp_hospE[49:59]Resp_hospE[21:37]<- Resp_hospE[61:77]Resp_hospE[39:40]<- Resp_hospE[79:80]for(i in 4:length(Resp_hospH)){    if(is.na(Resp_hospH[i])){Resp_hospH[i]<-mean(Resp_hospH[(i-3):(i-1)])}}Resp_hospH[1]<-6for(i in 4:length(Resp_hospI)){    if(is.na(Resp_hospI[i])){Resp_hospI[i]<-mean(Resp_hospI[(i-3):(i-1)])}}
+Gastro_hospA
+plot(Gastro_hospA,xlab="Day",ylab="Count",main="Gastrointestinal Syndrome")lines(lowess(Gastro_hospA,f=0.1),lwd=2)
+plot(Gastro_hospI,xlab="Day",ylab="Smoothed Counts",main="Gastrointestinal Syndrome",type="n",ylim=c(0,45))lines(lowess(Gastro_hospA,f=0.1),lwd=2,lty=1)lines(lowess(Gastro_hospB,f=0.1),lwd=2,lty=2)lines(lowess(Gastro_hospC,f=0.1),lwd=2,lty=3)lines(lowess(Gastro_hospD,f=0.1),lwd=2,lty=4)lines(lowess(Gastro_hospE,f=0.1),lwd=2,lty=5)lines(lowess(Gastro_hospH,f=0.1),lwd=2,lty=6)lines(lowess(Gastro_hospI,f=0.1),lwd=1,lty=7)legend(0,45,legend=c("Hospital #1","Hospital #2","Hospital #3","Hospital #4","Hospital #5","Hospital #6","Hospital #7"),lty=1:7,lwd=c(2,2,2,2,2,2,1))
+ls()
+Gastro.counts <- Resp_hospI[113:(113+365)]par(mfrow=c(2,2))qqnorm(Gastro.counts[1:92]-lowess(Gastro.counts,f=0.1)$y[1:92],xlab="",main="Days 1-92")qqnorm(Gastro.counts[93:183]-lowess(Gastro.counts,f=0.1)$y[93:183], xlab="", ylab="",main="Days 93-183")qqnorm(Gastro.counts[184:274]-lowess(Gastro.counts,f=0.1)$y[184:274], main="Days 184-274")qqnorm(Gastro.counts[275:366]-lowess(Gastro.counts,f=0.1)$y[275:366], ylab="", main="Days 275-366")
+fake.data <- rep(0,365)for(i in 1:365){fake.data[i] <- 16.75 + 6.4*sin(2*pi*(i+40)/365 )} #cyclefake.data <- fake.data + rnorm(365,0,5.0) #noiseresids<- Gastro_hospI[113:(113+365)] - lowess(Gastro_hospI[113:(113+365)],f=0.3)$ymon<-mean(resids[days[113:(113+365)]=="M"])tue<-mean(resids[days[113:(113+365)]=="T"])wed<-mean(resids[days[113:(113+365)]=="W"])thu<-mean(resids[days[113:(113+365)]=="Th"])fri<-mean(resids[days[113:(113+365)]=="F"])sat<-mean(resids[days[113:(113+365)]=="S"])sun<-mean(resids[days[113:(113+365)]=="Su"])day.effect<-c(mon,tue,wed,thu,fri,sat,sun)fake.data<-fake.data+day.effectfor(i in 1:365){fake.data[i] <- max(0,fake.data[i])} #no negative countspar(mfrow=c(1,2))plot(Gastro_hospI[113:(113+365)],ylim=c(0,50),ylab="Hospital #7, Actual Daily Count",xlab="Day")#lines(lowess(Gastro_hospI[113:478],f=0.3))plot(fake.data,ylim=c(0,50) ,ylab="Hospital #7, Simulated Daily Count",xlab="Day")#lines(lowess(fake.data,f=0.2))
+shiny::runApp("/Users/rdfricker/Desktop")
+shiny::runApp("/Users/rdfricker/Desktop/DistroDemo")
+shiny::runApp("/Users/rdfricker/Desktop")
+shiny::runApp("/Users/rdfricker/Desktop/DistroDemo")
+shiny::runApp("/Users/rdfricker/Desktop")
+?dbinom
+shiny::runApp("/Users/rdfricker/Desktop")
+ls()
+x<-0:100
+p<-0.5
+y<-dbinom(x,100,p)
+plot(x,y,type=h,main="Probability Mass Function",xlab="y",ylab="P(Y=y)")
+plot(x,y,type="h",main="Probability Mass Function",xlab="y",ylab="P(Y=y)")
+shiny::runApp("/Users/rdfricker/Desktop")
+?renderPlot
+ls()
+shiny::runApp("/Users/rdfricker/Desktop")
+?dbinom
+x <- 0:100#
+      y <- dbinom(x,100,0.3)#
+      plot(x,y,type="h",main="Probability Mass Function",xlab="y",ylab="P(Y=y)")
+shiny::runApp("/Users/rdfricker/Desktop")
+?plot
+shiny::runApp("/Users/rdfricker/Desktop")
+?lines
+shiny::runApp("/Users/rdfricker/Desktop")
+shiny::runApp("/Users/rdfricker/Desktop/distroDemos/binomial")
+1724.97-169-(22.66/9)
+runApp("/Users/rdfricker/Desktop/Discrete")
+library(shiny)
+runApp("/Users/rdfricker/Desktop/Discrete")
+runExample("06_tabsets")
+runApp("/Users/rdfricker/Desktop/Discrete")
+?pgeom
+runApp("/Users/rdfricker/Desktop/Discrete")
+?rect
+runApp("/Users/rdfricker/Desktop/Discrete")
+?dpois
+runApp("/Users/rdfricker/Desktop/Discrete")
+?dgeom
+runApp("/Users/rdfricker/Desktop/Discrete")
+shiny::runGitHub('DiscreteDistnDemos','rdfricker')
+runApp("/Users/rdfricker/Desktop/Test")
+library("shiny")
+runApp("/Users/rdfricker/Desktop/Test")
+?reactive
+?reactiveValues
+runApp("/Users/rdfricker/Desktop/Test")
+renderUI
+?renderUI
+runApp("/Users/rdfricker/Desktop/Test")
+renderUI
+?renderUI
+?selectInput
+runApp("/Users/rdfricker/Desktop/Test")
+runApp("/Users/rdfricker/Desktop/Test")
+runApp("/Users/rdfricker/Desktop/Test")
+runApp("/Users/rdfricker/Desktop/Test")
+updateSliderInput
+sliderInput
+??update
+?updateSelectInput
+updateSelectInput
+?observe
+runApp("/Users/rdfricker/Dropbox/Working Files/OA3101/Discrete")
+runApp("/Users/rdfricker/Desktop/Discrete")
+runApp("/Users/rdfricker/Desktop/Discrete")
+runApp("/Users/rdfricker/Desktop/Discrete")
+runApp("/Users/rdfricker/Desktop/Discrete")
+runApp("/Users/rdfricker/Desktop/Discrete")
