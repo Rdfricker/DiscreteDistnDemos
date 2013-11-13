@@ -109,7 +109,7 @@ shinyServer(function(input,output){
   	if (input$typeDist == "bin") {	
   	  x <- 0:round(input$num_bin)
       y <- dbinom(x,input$num_bin,input$prob_bin)
-      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue")
+      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue",ylim=c(0,max(y)))
       points(x,y,pch=19,col="blue")
       lines(c(-2,input$num_bin+2),c(0,0))
       mtext(bquote(Bin(n==.(input$num_bin),p==.(input$prob_bin))),,side=3,padj=0,cex=2,at=round(input$num_bin)/2)    
@@ -117,7 +117,7 @@ shinyServer(function(input,output){
     if (input$typeDist == "geo") {	  
       x <- 0:round(input$max_x_geo)
       y <- dgeom(x-1,input$prob_geo)
-      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue")
+      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue",ylim=c(0,max(y)))
       points(x,y,pch=19,col="blue")
       lines(c(-2,input$max_x_geo),c(0,0))       
       mtext(bquote(Geo(p==.(input$prob_geo))),,side=3,padj=0,cex=2,at=round(input$max_x_geo)/2)   
@@ -125,7 +125,7 @@ shinyServer(function(input,output){
     if (input$typeDist == "nbin") {	
       x <- 0:round(input$num_trials)
       y <- dnbinom(x-input$num_suc_trials,input$num_suc_trials, input$prob_nbin)
-      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue")
+      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue",ylim=c(0,max(y)))
       points(x,y,pch=19,col="blue")
       lines(c(-2,input$num_trials),c(0,0)) 
       mtext(bquote(NB(r==.(input$num_suc_trials),p==.(input$prob_nbin))),,side=3,padj=0,cex=2,at=round(input$num_trials)/2)   
@@ -133,7 +133,7 @@ shinyServer(function(input,output){
     if (input$typeDist == "hyp") {	
       x <- 0:round(input$sample_hyp)
       y <- dhyper(x,input$red_hyp,input$pop_hyp-input$red_hyp,input$sample_hyp)
-      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue")
+      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue",ylim=c(0,max(y)))
       points(x,y,pch=19,col="blue")
       lines(c(-2,input$sample_hyp),c(0,0))       
       mtext(bquote(Hyper(N==.(input$pop_hyp),r==.(input$red_hyp),n==.(input$sample_hyp))),,side=3,padj=0,cex=2,at=round(input$sample_hyp)/2)         
@@ -141,7 +141,7 @@ shinyServer(function(input,output){
     if (input$typeDist == "pois") {	  
       x <- 0:round(input$max_x_pois)
       y <- dpois(x,input$lambda)
-      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue")
+      plot(x,y,type="h",main="",xlab=expression(y),ylab=expression(P(Y==y)),lwd=2,col="blue",ylim=c(0,max(y)))
       points(x,y,pch=19,col="blue")
       lines(c(-2,input$max_x_pois),c(0,0)) 
       mtext(bquote(Pois(lambda==.(input$lambda))),,side=3,padj=0,cex=2,at=round(input$max_x_pois)/2)             
