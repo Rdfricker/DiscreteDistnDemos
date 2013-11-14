@@ -42,7 +42,7 @@ shinyServer(function(input,output){
     if (input$typeDist == "geo") {	  
       x <- 0:round(input$max_x_geo)
       y <- dgeom(x-1,input$prob_geo)
-      plot(x,y,type="n",ylim=c(0,max(y)),main="",xlab=expression(y),ylab=expression(P(Y==y)),ylim=c(0,max(y)))
+      plot(x,y,type="n",ylim=c(0,max(y)),main="",xlab=expression(y),ylab=expression(P(Y==y)))
       lines(c(-2,input$max_x_geo+2),c(0,0))
       for(i in 1:(input$max_x_geo+1)){rect(x[i]-0.5,y[i],x[i]+0.5,0,col="gray")}
       
@@ -58,7 +58,7 @@ shinyServer(function(input,output){
     if (input$typeDist == "nbin") {	    
       x <- 0:round(input$num_trials)
       y <- dnbinom(x-input$num_suc_trials,input$num_suc_trials, input$prob_nbin)
-      plot(x,y,type="n",ylim=c(0,max(y)),main="",xlab=expression(y),ylab=expression(P(Y==y)),ylim=c(0,max(y)))
+      plot(x,y,type="n",ylim=c(0,max(y)),main="",xlab=expression(y),ylab=expression(P(Y==y)))
       lines(c(-2,input$num_trials+2),c(0,0))
       for(i in 1:(input$num_trials+1)){rect(x[i]-0.5,y[i],x[i]+0.5,0,col="gray")}   
             
@@ -74,7 +74,7 @@ shinyServer(function(input,output){
     if (input$typeDist == "hyp") {	    
       x <- 0:round(input$sample_hyp)
       y <- dhyper(x,input$red_hyp,input$pop_hyp-input$red_hyp,input$sample_hyp)
-      plot(x,y,type="n",ylim=c(0,max(y)),main="",xlab=expression(y),ylab=expression(P(Y==y)),ylim=c(0,max(y)))
+      plot(x,y,type="n",ylim=c(0,max(y)),main="",xlab=expression(y),ylab=expression(P(Y==y)))
       lines(c(-2,input$sample_hyp+2),c(0,0))
       for(i in 1:(input$sample_hyp+1)){rect(x[i]-0.5,y[i],x[i]+0.5,0,col="gray")}  
              
@@ -90,7 +90,7 @@ shinyServer(function(input,output){
     if (input$typeDist == "pois") {	
       x <- 0:round(input$max_x_pois)
       y <- dpois(x,input$lambda)
-      plot(x,y,type="n",ylim=c(0,max(y)),main="",xlab=expression(y),ylab=expression(P(Y==y)),ylim=c(0,max(y)))
+      plot(x,y,type="n",ylim=c(0,max(y)),main="",xlab=expression(y),ylab=expression(P(Y==y)))
       lines(c(-2,input$max_x_pois+2),c(0,0))
       for(i in 1:(input$max_x_pois+1)){rect(x[i]-0.5,y[i],x[i]+0.5,0,col="gray")} 
             
