@@ -376,9 +376,6 @@ renderUI
 ?renderUI
 ?selectInput
 runApp("/Users/rdfricker/Desktop/Test")
-runApp("/Users/rdfricker/Desktop/Test")
-runApp("/Users/rdfricker/Desktop/Test")
-runApp("/Users/rdfricker/Desktop/Test")
 updateSliderInput
 sliderInput
 ??update
@@ -387,7 +384,13 @@ updateSelectInput
 ?observe
 runApp("/Users/rdfricker/Dropbox/Working Files/OA3101/Discrete")
 runApp("/Users/rdfricker/Desktop/Discrete")
-runApp("/Users/rdfricker/Desktop/Discrete")
-runApp("/Users/rdfricker/Desktop/Discrete")
-runApp("/Users/rdfricker/Desktop/Discrete")
-runApp("/Users/rdfricker/Desktop/Discrete")
+library(shiny)
+runApp("/Users/ronfricker/OA3101/DiscreteDistnDemos")
+runApp("/Users/ronfricker/OA3101/DiscreteDistnDemos")
+runApp("/Users/ronfricker/OA3101/DiscreteDistnDemos")
+runApp("/Users/ronfricker/OA3101/DiscreteDistnDemos")
+shiny::runGitHub('DiscreteDistnDemos','rdfricker')
+shiny::runGitHub('DiscreteDistnDemos','rdfricker')
+shiny::runGitHub('DiscreteDistnDemos','rdfricker')
+shiny::runGitHub('DiscreteDistnDemos','rdfricker')
+shiny::runGitHub('DiscreteDistnDemos','rdfricker')
