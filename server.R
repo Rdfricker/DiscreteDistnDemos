@@ -77,7 +77,7 @@ shinyServer(function(input,output){
       plot(x,y,type="n",main="",xlab=expression(y),ylab=expression(P(Y==y)),ylim=c(0,max(y)))
       lines(c(-2,input$sample_hyp+2),c(0,0))
       for(i in 1:(input$sample_hyp+1)){rect(x[i]-0.5,y[i],x[i]+0.5,0,col="gray")}  
-            
+              
       mu <- input$sample_hyp*input$red_hyp/input$pop_hyp
       sigma <- sqrt((input$sample_hyp*input$red_hyp/input$pop_hyp)*((input$pop_hyp-input$red_hyp)/input$pop_hyp)*((input$pop_hyp-input$sample_hyp)/(input$pop_hyp-1)))    
       if(input$show1SD==TRUE) plot1SD(mu,sigma)
