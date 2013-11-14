@@ -42,7 +42,7 @@ shinyServer(function(input,output){
     if (input$typeDist == "geo") {	  
       x <- 0:round(input$max_x_geo)
       y <- dgeom(x-1,input$prob_geo)
-      plot(x,y,type="n",ylim=c(0,max(y)),xlim=c(min(x)-1,max(x)+1),main="",xlab=expression(y),ylab=expression(P(Y==y)))
+      plot(x,y,type="n",ylim=c(0,max(y)),xlim=c(min(x),max(x)+1),main="",xlab=expression(y),ylab=expression(P(Y==y)))
       lines(c(-2,input$max_x_geo+2),c(0,0))
       for(i in 1:(input$max_x_geo+1)){rect(x[i]-0.5,y[i],x[i]+0.5,0,col="gray")}
       
