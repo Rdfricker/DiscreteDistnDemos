@@ -26,7 +26,7 @@ shinyServer(function(input,output){
   	if (input$typeDist == "bin") {	
       x <- 0:round(input$num_bin)
       y <- dbinom(x,input$num_bin,input$prob_bin)
-      plot(x,y,type="n",main="",xlab=expression(y),ylab=expression(P(Y==y),ylim=c(0,max(y))))
+      plot(x,y,type="n",main="",xlab=expression(y),ylab=expression(P(Y==y),ylim=c(0,100)))
       lines(c(-2,input$num_bin+2),c(0,0))
       for(i in 1:(input$num_bin+1)){rect(x[i]-0.5,y[i],x[i]+0.5,0,col="gray")}
       
